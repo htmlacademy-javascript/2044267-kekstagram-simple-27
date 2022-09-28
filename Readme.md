@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм (простой)»
 
-* Студент: [Софья Полякова](https://up.htmlacademy.ru/javascript/27/user/2044267).
-* Наставник: `Неизвестно`.
+- Студент: [Софья Полякова](https://up.htmlacademy.ru/javascript/27/user/2044267).
+- Наставник: `Alexey Koryakin`.
 
 ---
 
