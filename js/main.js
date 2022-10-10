@@ -1,22 +1,22 @@
-function random(min, max) {
-  if (min > max) [min, max] = [max, min]; // проверка на соответствие порядка входных данных
-  if (min == null || max == null) return "null"; // проверка на соответствие входных данных с null
-  let arr = []; // создание пустого массива
-  min += 1; // увиличение мин числа для соответствия диапазона
-  for (min; min < max; min++) {
-    arr.push(min);
-  } // цикл для наполнения массива числами из диапазона
+function getRandomNum(min, max) {
+  const str = NaN;
+  if (min > max) {
+    [min, max] = [max, min];
+  } // проверка на соответствие порядка входных данных
+  if (min === null || max === null) {
+    return str;
+  } // проверка на соответствие входных данных с null
 
-  let randomInd = Math.floor(Math.random() * arr.length); // генерация рандомного числа для индекса массива
-  return arr[randomInd]; // возврат результата
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-console.log(random(1, 10));
-console.log(random(10, 1));
-console.log(random());
+console.log(getRandomNum(1, 10));
+console.log(getRandomNum(10, 1));
+console.log(getRandomNum());
 
-// function valid(str, n) {
-//   return str.length == n;
-// }
+const str = 'Hello';
+function valid(s, n) {
+  return s.length === n;
+}
 
-// console.log(valid("Hello", 5));
+console.log(valid(str, 5));
