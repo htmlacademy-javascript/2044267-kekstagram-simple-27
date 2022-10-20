@@ -1,29 +1,7 @@
-// функция для проверки максимальной длины строки
-// function check(string, maxLenght) {
-//   return string.length <= maxLenght;
-// }
+function checkLenght(string, maxLenght) {
+  return string.length <= maxLenght;
+}
 
-// ДЗ
-
-
-// на основе написанных по заданию
-// -ранее вспомогательных функций напишите
-// - необходимые функции для
-// - создания массива
-// - из 25 сгенерированных объектов
-
-// Каждый объект массива — описание фотографии, опубликованной пользователем
-
-
-// ! функция должна выполнять цикл 25 раз который добавляет к массиву каждый раз один объект
-// (но это не точно)
-
-// решение:
-
-// это пустой массив
-let foto = [];
-
-// моя функция, возвращающая случайное целое число из переданного диапазона включительно
 function getRandomNum(min, max) {
   if (typeof min !== 'number' || typeof max !== 'number') {
     return NaN;
@@ -36,24 +14,22 @@ function getRandomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// функция, которая создает массив из 25 сгенерированных объектов
-function getArr () {
-  // цикл до 25 добавляющий 1 объект
-  for (i = 1; i <= 25; i++) {
-// это объект (с урлом проблема)
-    let obj = {
-        id: i,
-        url: 'photos/' + i + '.jpg',
-        description: 'nature ' + i,
-        likes: getRandomNum(15, 200),
-        comments: getRandomNum(0, 200)
-// в теле цикла метод push - добавляет неогр колво элементов в конец массива
-foto.push(obj)
-    }
+function getData() {
+  const fotos = [];
+
+  for (let i = 1; i <= 25; i++) {
+    const obj = {
+      id: i,
+      url: `photos/${i}.jpg`,
+      description: `nature${i}`,
+      likes: getRandomNum(15, 200),
+      comments: getRandomNum(0, 200)
+    };
+
+    fotos.push(obj);
   }
 
-// вызов функции
-getArr();
+  return fotos;
+}
 
-// вывод массива в консоль
-// console.log(foto)
+getData();
