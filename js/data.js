@@ -18,6 +18,6 @@ function getData() {
   return fotos;
 }
 
-getData();
+const data = getData();
 
-export {getData};
+export {data};
