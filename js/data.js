@@ -1,7 +1,7 @@
 import {getRandomNum} from './util.js';
 
 function getData() {
-  const fotos = [];
+  const photos = [];
 
   for (let i = 1; i <= 25; i++) {
     const obj = {
@@ -12,10 +12,10 @@ function getData() {
       comments: getRandomNum(0, 200)
     };
 
-    fotos.push(obj);
+    photos.push(obj);
   }
 
-  return fotos;
+  return photos;
 }
 
 const data = getData();
