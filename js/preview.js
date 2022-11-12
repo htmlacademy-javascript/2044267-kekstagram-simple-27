@@ -18,3 +18,9 @@ function createPicture(photos) {
 }
 
 createPicture(data);
+
+const clearPicture = () => {
+  picturesElement.innerHTML = '';
+};
+
+export {createPicture, clearPicture};
