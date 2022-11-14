@@ -214,7 +214,10 @@
                       required
                       minlength="20"
                       maxlength="140"
-                    ></textarea>
+                      data-pristine-required-message="Обязательное поле"
+                      data-pristine-minlength-message="Минимальная длина 20 символа"
+                      data-pristine-maxlength-message="Максимальная длина 140 символов">
+                    </textarea>
                   </fieldset>
 
                   <!-- Кнопка для отправки данных на сервер -->
@@ -314,5 +317,6 @@
       </section>
     </template>
     <script src="js/main.js" type="module"></script>
+    <script src="vendor/pristine/pristine.min.js"></script>
   </body>
 </html>
