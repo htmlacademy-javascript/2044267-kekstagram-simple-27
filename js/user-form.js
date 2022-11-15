@@ -6,14 +6,15 @@ const pristine = new Pristine(userForm, {
   errorTextClass: 'img-upload__text-error',
 });
 
-
-userForm.addEventListener('submit', (evt) => {
+function onUserFormClick (evt) {
   evt.preventDefault();
 
   const isValid = pristine.validate();
   if (isValid) {
-
+    
   } else {
-
+    
   }
-});
+}
+
+userForm.addEventListener('submit', onUserFormClick);

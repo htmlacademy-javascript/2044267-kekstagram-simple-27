@@ -1,5 +1,3 @@
-import {data} from './data.js';
-
 const picturesElement = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content;
 
@@ -18,4 +16,5 @@ function createPicture(photos) {
   picturesElement.appendChild(fragment);
 }
 
-createPicture(data);
+export {createPicture};
+

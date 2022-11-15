@@ -1,9 +1,8 @@
 import {isEscapeKey} from './util.js';
-import './user-form.js';
 
 const uploadForm = document.querySelector('#upload-file');
 const uploadOpenForm = document.querySelector('.img-upload__overlay');
-const uploadCloseForm = uploadForm.querySelector('#upload-cancel');
+const uploadCloseForm = uploadOpenForm.querySelector('.img-upload__cancel');
 
 function onFormEscKeydown(evt) {
   if (isEscapeKey(evt)) {
@@ -24,10 +23,16 @@ function closeUserForm () {
   document.removeEventListener('keydown', onFormEscKeydown);
 }
 
-uploadForm.addEventListener('click', () => {
+function onUploadFormClick () {
   openUserForm();
-});
+}
 
-uploadCloseForm.addEventListener('click', () => {
+uploadForm.addEventListener('change', onUploadFormClick);
+
+function onUploadCloseForm () {
   closeUserForm();
-});
+}
+
+uploadCloseForm.addEventListener('click', onUploadCloseForm);
+
+
