@@ -29,10 +29,10 @@ function onUploadFormClick () {
 
 uploadForm.addEventListener('change', onUploadFormClick);
 
-function onUploadCloseForm () {
+function onUploadCloseFormClick () {
   closeUserForm();
 }
 
-uploadCloseForm.addEventListener('click', onUploadCloseForm);
+uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
 
 
