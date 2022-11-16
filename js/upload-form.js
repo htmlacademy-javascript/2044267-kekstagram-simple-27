@@ -33,6 +33,5 @@ function onUploadCloseFormClick () {
   closeUserForm();
 }
 
-uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
-
-
+uploadCloseForm.addEventListener('click', onUploadCloseFormClick);
+uploadForm.removeEventListener('click', onUploadCloseFormClick);
