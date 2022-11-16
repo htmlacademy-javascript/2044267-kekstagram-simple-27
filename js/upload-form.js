@@ -11,27 +11,26 @@ function onFormEscKeydown(evt) {
   }
 }
 
+function onUploadCloseFormClick () {
+  closeUserForm();
+}
+
 function openUserForm () {
   uploadOpenForm.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   document.addEventListener('keydown', onFormEscKeydown);
+  uploadCloseForm.addEventListener('click', onUploadCloseFormClick);
 }
 
 function closeUserForm () {
   uploadOpenForm.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onFormEscKeydown);
+  uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
 }
 
-function onUploadFormClick () {
+function onUploadFormChange () {
   openUserForm();
 }
 
-uploadForm.addEventListener('change', onUploadFormClick);
-
-function onUploadCloseFormClick () {
-  closeUserForm();
-}
-
-uploadCloseForm.addEventListener('click', onUploadCloseFormClick);
-uploadForm.removeEventListener('click', onUploadCloseFormClick);
+uploadForm.addEventListener('change', onUploadFormChange);
