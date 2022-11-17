@@ -4,4 +4,3 @@ import './upload-form.js';
 import './user-form.js';
 
 createPicture(data);
-
