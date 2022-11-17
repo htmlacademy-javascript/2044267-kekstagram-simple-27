@@ -14,4 +14,8 @@ function getRandomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export {checkLenght, getRandomNum};
+function isEscapeKey(evt) {
+  return evt.key === 'Escape';
+}
+
+export {checkLenght, getRandomNum, isEscapeKey};

@@ -27,6 +27,7 @@
               class="img-upload__form"
               id="upload-select-image"
               method="post"
+              action="https://27.javascript.pages.academy/kekstagram-simple"
               enctype="multipart/form-data"
               autocomplete="off"
             >
@@ -210,7 +211,12 @@
                       class="text__description"
                       name="description"
                       placeholder="Ваш комментарий..."
-                    ></textarea>
+                      minlength="20"
+                      maxlength="140"
+                      data-pristine-required-message="Обязательное поле"
+                      data-pristine-minlength-message="Минимальная длина 20 символа"
+                      data-pristine-maxlength-message="Максимальная длина 140 символов"
+                      required></textarea>
                   </fieldset>
 
                   <!-- Кнопка для отправки данных на сервер -->
@@ -310,5 +316,6 @@
       </section>
     </template>
     <script src="js/main.js" type="module"></script>
+    <script src="vendor/pristine/pristine.min.js"></script>
   </body>
 </html>
