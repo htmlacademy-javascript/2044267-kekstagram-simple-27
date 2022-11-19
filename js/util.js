@@ -19,3 +19,4 @@ function isEscapeKey(evt) {
 }
 
 export {checkLenght, getRandomNum, isEscapeKey};
+

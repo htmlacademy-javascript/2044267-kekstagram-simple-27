@@ -7,31 +7,37 @@ const STEP = 25;
 const MIN_VALUE = 25;
 const MAX_VALUE = 100;
 
-function changeValue(newValue) {
-  scaleValue.value = `${newValue}%`;
-  imagePreview.style.transform = `scale(${newValue / 100})`;
+function scaleImage(value) {
+  scaleValue.value = `${value}%`;
+  imagePreview.style.transform = `scale(${value / 100})`;
 }
 
 function onButtonMinClick() {
-  const currentValue = scaleValue.value;
-  const valueNumber = parseInt(currentValue, 10);
-  if (valueNumber > MIN_VALUE && valueNumber <= MAX_VALUE) {
-    changeValue(valueNumber - STEP);
+  const currentValue = parseInt(scaleValue, 10);
+  let newValue = currentValue - STEP;
+
+  if (newValue < MIN_VALUE) {
+    newValue = MIN_VALUE;
   }
+  scaleImage(newValue);
 }
 
 buttonMin.addEventListener('click', onButtonMinClick);
 
 function onButtonMaxClick() {
-  const currentValue = scaleValue.value;
-  const valueNumber = parseInt(currentValue, 10);
-  if (valueNumber >= MIN_VALUE && valueNumber < MAX_VALUE) {
-    changeValue(valueNumber + STEP);
+  const currentValue = parseInt(scaleValue, 10);
+  let newValue = currentValue + STEP;
+
+  if (newValue > MAX_VALUE) {
+    newValue = MAX_VALUE;
   }
+  scaleImage(newValue);
+}
+
+function resetValue() {
+  scaleImage(100);
 }
 
 buttonMax.addEventListener('click', onButtonMaxClick);
 
-export function resetScale() {
-  changeValue(100);
-}
+export {resetValue};
