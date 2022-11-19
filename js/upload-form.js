@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
 
 const uploadForm = document.querySelector('.img-upload__overlay');
 const uploadOpenForm = document.querySelector('.img-upload__overlay');
@@ -27,6 +28,7 @@ function closeUserForm () {
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
+  resetScale();
 }
 
 function onUploadFormChange () {

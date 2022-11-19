@@ -2,6 +2,6 @@
 import {createPicture} from './preview.js';
 import './upload-form.js';
 import './user-form.js';
-import {resetValue} from '/scale.js';
+// import '/scale.js';
 
 createPicture(data);

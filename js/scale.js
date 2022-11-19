@@ -4,42 +4,34 @@ const scaleValue = document.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview img');
 
 const STEP = 25;
-const DEFAULT_VALUE = 100;
 const MIN_VALUE = 25;
 const MAX_VALUE = 100;
 
-const scaleImage = (value = DEFAULT_VALUE) => {
-  scaleValue.value = `${value}%`;
-  imagePreview.style.transform = `scale(${value / 100})`;
-
-};
+function changeValue(newValue) {
+  scaleValue.value = `${newValue}%`;
+  imagePreview.style.transform = `scale(${newValue / 100})`;
+}
 
 function onButtonMinClick() {
-  const currentValue = parseInt(scaleValue, 10);
-  let newValue = currentValue - STEP;
-
-  if (newValue < MIN_VALUE) {
-    newValue = MIN_VALUE;
+  const currentValue = scaleValue.value;
+  const valueNumber = parseInt(currentValue, 10);
+  if (valueNumber > MIN_VALUE && valueNumber <= MAX_VALUE) {
+    changeValue(valueNumber - STEP);
   }
-  scaleImage(newValue);
 }
 
 buttonMin.addEventListener('click', onButtonMinClick);
 
 function onButtonMaxClick() {
-  const currentValue = parseInt(scaleValue, 10);
-  let newValue = currentValue + STEP;
-
-  if (newValue > MAX_VALUE) {
-    newValue = MAX_VALUE;
+  const currentValue = scaleValue.value;
+  const valueNumber = parseInt(currentValue, 10);
+  if (valueNumber >= MIN_VALUE && valueNumber < MAX_VALUE) {
+    changeValue(valueNumber + STEP);
   }
-  scaleImage(newValue);
-}
-
-function resetValue() {
-  scaleImage();
 }
 
 buttonMax.addEventListener('click', onButtonMaxClick);
 
-export {resetValue};
+export function resetScale() {
+  changeValue(100);
+}
