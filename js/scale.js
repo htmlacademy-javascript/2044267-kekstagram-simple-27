@@ -27,8 +27,12 @@ function onButtonMaxClick() {
   }
 }
 
+function resetScale() {
+  imagePreview.style.transform = 'none';
+}
+
 buttonMax.addEventListener('click', onButtonMaxClick);
 
-export {imagePreview};
+export {resetScale};
 
 

@@ -1,39 +1,38 @@
 const imageEffect = document.querySelector('.img-upload__preview img');
 const userForm = document.querySelector('.img-upload__form');
-const EFFECTS = [
+const effects = [
   {
-    name: 'none',
-    style: 'none',
+    NAME: 'none',
+    STYLE: 'none',
   },
   {
-    name:'chrome',
-    style: 'grayscale',
+    NAME:'chrome',
+    STYLE: 'grayscale',
   },
   {
-    name: 'sepia',
-    style: 'sepia',
+    NAME: 'sepia',
+    STYLE: 'sepia',
   },
   {
-    name: 'marvin',
-    style: 'invert',
+    NAME: 'marvin',
+    STYLE: 'invert',
   },
   {
-    name: 'phobos',
-    style: 'blur',
+    NAME: 'phobos',
+    STYLE: 'blur',
   },
   {
-    name: 'heat',
-    style: 'brightness',
+    NAME: 'heat',
+    STYLE: 'brightness',
   }
 ];
-const ORIGINAL_EFFECT = EFFECTS[0];
-let currentEffect = ORIGINAL_EFFECT;
+let currentEffect = effects[0];
 
 function onEffectChange(evt) {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  currentEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
+  currentEffect = effects.find((effect) => effect.name === evt.target.value);
   imageEffect.className = '';
   imageEffect.style.filter = `${currentEffect.style}`;
   imageEffect.classList.add(`effects__preview--${currentEffect.name}`);
@@ -46,3 +45,4 @@ function resetEffects() {
 userForm.addEventListener('change', onEffectChange);
 
 export {resetEffects};
+

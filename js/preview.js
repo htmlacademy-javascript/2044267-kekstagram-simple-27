@@ -1,5 +1,5 @@
 const picturesElement = document.querySelector('.pictures');
-const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const picturesTemplate = document.querySelector('#picture').content;
 
 function createPicture(photos) {
   const fragment = document.createDocumentFragment();
