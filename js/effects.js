@@ -32,10 +32,10 @@ function onEffectChange(evt) {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  currentEffect = effects.find((effect) => effect.name === evt.target.value);
+  currentEffect = effects.find((effect) => effect.NAME === evt.target.value);
   imageEffect.className = '';
-  imageEffect.style.filter = `${currentEffect.style}`;
-  imageEffect.classList.add(`effects__preview--${currentEffect.name}`);
+  imageEffect.style.filter = `${currentEffect.STYLE}`;
+  imageEffect.classList.add(`effects__preview--${currentEffect.NAME}`);
 }
 
 function resetEffects() {
