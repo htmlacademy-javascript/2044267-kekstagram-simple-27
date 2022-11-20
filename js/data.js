@@ -6,7 +6,7 @@ function getData() {
   for (let i = 1; i <= 25; i++) {
     const obj = {
       id: i,
-      url: 'https://via.placeholder.com/182',
+      url: `photos/${i}.jpg`,
       description: `nature${i}`,
       likes: getRandomNum(15, 200),
       comments: getRandomNum(0, 200)

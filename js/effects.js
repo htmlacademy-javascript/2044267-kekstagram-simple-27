@@ -1,6 +1,5 @@
 const imageEffect = document.querySelector('.img-upload__preview img');
 const userForm = document.querySelector('.img-upload__form');
-
 const EFFECTS = [
   {
     name: 'none',
@@ -27,7 +26,6 @@ const EFFECTS = [
     style: 'brightness',
   }
 ];
-
 const ORIGINAL_EFFECT = EFFECTS[0];
 let currentEffect = ORIGINAL_EFFECT;
 
