@@ -1,3 +1,5 @@
+import {resetEffects} from './effects.js';
+import {resetScale} from './scale.js';
 import {isEscapeKey} from './util.js';
 
 const uploadForm = document.querySelector('#upload-file');
@@ -20,6 +22,7 @@ function openUserForm () {
   document.querySelector('body').classList.add('modal-open');
   document.addEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.addEventListener('click', onUploadCloseFormClick);
+  resetScale();
 }
 
 function closeUserForm () {
@@ -27,6 +30,7 @@ function closeUserForm () {
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
+  resetEffects();
 }
 
 function onUploadFormChange () {
@@ -34,3 +38,4 @@ function onUploadFormChange () {
 }
 
 uploadForm.addEventListener('change', onUploadFormChange);
+

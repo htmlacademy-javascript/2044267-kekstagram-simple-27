@@ -1,12 +1,10 @@
-import {data} from './data.js';
-
 const picturesElement = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content;
 
 function createPicture(photos) {
   const fragment = document.createDocumentFragment();
 
-  photos.forEach(({url, likes, comments, description}) => {
+  photos.forEach(({url, description, likes, comments}) => {
     const pictureElement = picturesTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__img').alt = description;
@@ -18,4 +16,6 @@ function createPicture(photos) {
   picturesElement.appendChild(fragment);
 }
 
-createPicture(data);
+export {createPicture};
+
+
