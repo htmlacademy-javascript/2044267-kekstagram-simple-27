@@ -1,5 +1,3 @@
-const imageEffect = document.querySelector('.img-upload__preview img');
-const userForm = document.querySelector('.img-upload__form');
 const effects = [
   {
     NAME: 'none',
@@ -26,6 +24,9 @@ const effects = [
     STYLE: 'brightness',
   }
 ];
+
+const imageEffect = document.querySelector('.img-upload__preview img');
+const userForm = document.querySelector('.img-upload__form');
 let currentEffect = effects[0];
 
 function onEffectChange(evt) {

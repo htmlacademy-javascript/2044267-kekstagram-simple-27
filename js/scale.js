@@ -1,12 +1,13 @@
-const imagePreview = document.querySelector('.img-upload__preview');
-const buttonMin = document.querySelector('.scale__control--smaller');
-const buttonMax = document.querySelector('.scale__control--bigger');
-const scaleValue = document.querySelector('.scale__control--value');
 const scaleData = {
   STEP: 25,
   MIN: 25,
   MAX: 100
 };
+
+const imagePreview = document.querySelector('.img-upload__preview');
+const buttonMin = document.querySelector('.scale__control--smaller');
+const buttonMax = document.querySelector('.scale__control--bigger');
+const scaleValue = document.querySelector('.scale__control--value');
 let currentValue = parseFloat(scaleValue.value);
 
 function onButtonMinClick() {

@@ -1,3 +1,6 @@
+const minLength = 20;
+const maxLength = 140;
+
 const userForm = document.querySelector('.img-upload__form');
 
 const pristine = new Pristine(userForm, {
@@ -6,9 +9,11 @@ const pristine = new Pristine(userForm, {
   errorTextClass: 'img-upload__text-error',
 });
 
-function onUserFormSubmit (evt) {
-  evt.preventDefault();
+const validateDescription = (value) => value.length >= minLength && value.length <= maxLength;
 
+pristine.addValidator(userForm.querySelector('.text__description'), validateDescription);
+
+function onUserFormSubmit(evt) {
   const isValid = pristine.validate();
   if (!isValid) {
     evt.preventDefault();
@@ -16,3 +21,5 @@ function onUserFormSubmit (evt) {
 }
 
 userForm.addEventListener('submit', onUserFormSubmit);
+
+export {pristine};
