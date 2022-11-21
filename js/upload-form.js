@@ -1,21 +1,36 @@
 import {resetEffects} from './effects.js';
 import {resetScale} from './scale.js';
 import {isEscapeKey} from './util.js';
-import {showSuccessMessage, showErrorMessage} from './message.js';
 import {sendData} from './api.js';
 
-const userForm = document.querySelector('.img-upload__form');
+const userForm = document.querySelector('#upload-select-image');
 const uploadForm = document.querySelector('#upload-file');
 const uploadOpenForm = document.querySelector('.img-upload__overlay');
 const uploadCloseForm = uploadOpenForm.querySelector('.img-upload__cancel');
-const submitButton = document.querySelector('.img-upload__submit');
-const closeImageEditButton = document.querySelector('#upload-cancel');
+const submitButton = document.querySelector('#upload-submit');
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+
+const pristine = new Pristine(userForm, {
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text'
+});
 
 function onFormEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeUserForm();
   }
+}
+
+function isDisableSubmitButton() {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Сохраняю...';
+}
+
+function isEnableSubmitButton() {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Сохранить';
 }
 
 function onUploadCloseFormClick () {
@@ -36,6 +51,7 @@ function closeUserForm () {
   uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
   resetEffects();
   resetScale();
+  userForm.reset();
 }
 
 function onUploadFormChange () {
@@ -44,45 +60,81 @@ function onUploadFormChange () {
 
 uploadForm.addEventListener('change', onUploadFormChange);
 
-function isDisableSubmitButton() {
-  submitButton.disabled = true;
+function renderSuccessMessage() {
+  const successElement = successTemplate.cloneNode(true);
+  const inner = document.querySelector('.success__inner');
+  document.body.append(successElement);
+
+  const closeMessage = () => {
+    successElement.remove();
+    document.removeEventListener('keydown', onResetKeydown);
+  };
+
+  successElement.addEventListener('click', (evt) => {
+    if (evt.target === inner) {
+      return;
+    }
+    closeMessage();
+  });
+
+  function onResetKeydown (evt) {
+    if (isEscapeKey (evt)) {
+      closeMessage();
+    }
+  }
+
+  document.addEventListener('keydown', onResetKeydown);
 }
 
-function isEnableSubmitButton() {
-  submitButton.disabled = false;
+function renderErrorMessage() {
+  const failElement = errorTemplate.cloneNode(true);
+  const error = document.querySelector('.error__inner');
+  document.body.append(failElement);
+
+  const closeErrorMassage = () => {
+    failElement.remove();
+    document.removeEventListener('keydown', onResetError);
+  };
+
+  failElement.addEventListener('click', (evt) => {
+    if (evt.target === error){
+      return;
+    }
+    closeErrorMassage();
+  });
+
+  function onResetError (evt){
+    if (isEscapeKey (evt)) {
+      closeErrorMassage();
+    }
+  }
+
+  document.addEventListener('keydown', onResetError);
 }
 
-function resetFieldsValues() {
-  userForm.reset();
-}
-
-function onImageFormSubmit(evt, onSuccess) {
+function onUserFormSubmit(evt) {
+  const isValid = pristine.validate();
   evt.preventDefault();
 
-  isDisableSubmitButton();
-  const formData = new FormData(evt.target);
+  if (isValid) {
+    isDisableSubmitButton();
+  }
+
   sendData(
     () => {
       isEnableSubmitButton();
-      onSuccess();
-      showSuccessMessage();
-      resetFieldsValues();
+      closeUserForm();
+      renderSuccessMessage();
     },
     () => {
       isEnableSubmitButton();
-      showErrorMessage();
+      renderErrorMessage();
     },
-    formData
+    new FormData(evt.target),
   );
 }
 
-userForm.addEventListener('submit', onImageFormSubmit);
+userForm.addEventListener('submit', onUserFormSubmit);
 
-function initImageForm() {
-  uploadForm.addEventListener('change', openUserForm());
-  closeImageEditButton.addEventListener('click', closeUserForm());
-  onImageFormSubmit(closeUserForm());
-}
-
-export {initImageForm};
+export {onUserFormSubmit};
 
