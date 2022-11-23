@@ -13,7 +13,8 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 
 const pristine = new Pristine(userForm, {
   classTo: 'img-upload__text',
-  errorTextParent: 'img-upload__text'
+  errorTextParent: 'img-upload__text',
+  errorTextClass: 'img-upload__text-error',
 });
 
 function onFormEscKeydown(evt) {
@@ -113,11 +114,14 @@ function renderErrorMessage() {
 }
 
 function onUserFormSubmit(evt) {
-  const isValid = pristine.validate();
   evt.preventDefault();
+  const isValid = pristine.validate();
 
   if (isValid) {
     isDisableSubmitButton();
+  } else {
+    isEnableSubmitButton();
+    return;
   }
 
   sendData(

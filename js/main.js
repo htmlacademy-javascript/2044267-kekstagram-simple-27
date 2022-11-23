@@ -4,7 +4,5 @@ import {onUserFormSubmit} from './upload-form.js';
 import {getData} from './api.js';
 
 createPicture(data);
-getData();
-onUserFormSubmit();
 
 
