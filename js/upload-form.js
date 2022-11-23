@@ -26,36 +26,39 @@ function onFormEscKeydown(evt) {
 
 function isDisableSubmitButton() {
   submitButton.disabled = true;
-  submitButton.textContent = 'Сохраняю...';
+  submitButton.textContent = 'Отправляю...';
 }
 
 function isEnableSubmitButton() {
   submitButton.disabled = false;
-  submitButton.textContent = 'Сохранить';
+  submitButton.textContent = 'Опубликовать';
 }
 
-function onUploadCloseFormClick () {
+function onUploadCloseFormClick() {
   closeUserForm();
 }
 
-function openUserForm () {
+function openUserForm() {
   uploadOpenForm.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   document.addEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.addEventListener('click', onUploadCloseFormClick);
+  userForm.addEventListener('submit', onUserFormSubmit);
 }
 
-function closeUserForm () {
+function closeUserForm() {
+  resetEffects();
+  resetScale();
+  userForm.reset();
+  pristine.reset();
   uploadOpenForm.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
-  resetEffects();
-  resetScale();
-  userForm.reset();
+  userForm.removeEventListener('submit', onUserFormSubmit);
 }
 
-function onUploadFormChange () {
+function onUploadFormChange() {
   openUserForm();
 }
 
@@ -66,19 +69,19 @@ function renderSuccessMessage() {
   const inner = document.querySelector('.success__inner');
   document.body.append(successElement);
 
-  const closeMessage = () => {
+  function closeMessage() {
     successElement.remove();
     document.removeEventListener('keydown', onResetKeydown);
-  };
+  }
 
   successElement.addEventListener('click', (evt) => {
     if (evt.target === inner) {
       return;
     }
-    closeMessage();
+    document.addEventListener('click', closeMessage);
   });
 
-  function onResetKeydown (evt) {
+  function onResetKeydown(evt) {
     if (isEscapeKey (evt)) {
       closeMessage();
     }
@@ -92,21 +95,21 @@ function renderErrorMessage() {
   const error = document.querySelector('.error__inner');
   document.body.append(failElement);
 
-  const closeErrorMassage = () => {
+  function closeErrorMessage() {
     failElement.remove();
     document.removeEventListener('keydown', onResetError);
-  };
+  }
 
   failElement.addEventListener('click', (evt) => {
     if (evt.target === error){
       return;
     }
-    closeErrorMassage();
+    document.addEventListener('click', closeErrorMessage);
   });
 
-  function onResetError (evt){
+  function onResetError(evt) {
     if (isEscapeKey (evt)) {
-      closeErrorMassage();
+      closeErrorMessage();
     }
   }
 
@@ -115,30 +118,23 @@ function renderErrorMessage() {
 
 function onUserFormSubmit(evt) {
   evt.preventDefault();
-  const isValid = pristine.validate();
 
-  if (isValid) {
+  if (pristine.validate()) {
     isDisableSubmitButton();
-  } else {
-    isEnableSubmitButton();
-    return;
+    sendData(
+      () => {
+        isEnableSubmitButton();
+        closeUserForm();
+        renderSuccessMessage();
+      },
+      () => {
+        isDisableSubmitButton();
+        renderErrorMessage();
+      },
+      new FormData(evt.target),
+    );
   }
-
-  sendData(
-    () => {
-      isEnableSubmitButton();
-      closeUserForm();
-      renderSuccessMessage();
-    },
-    () => {
-      isEnableSubmitButton();
-      renderErrorMessage();
-    },
-    new FormData(evt.target),
-  );
 }
-
-userForm.addEventListener('submit', onUserFormSubmit);
 
 export {onUserFormSubmit};
 
