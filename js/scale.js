@@ -1,7 +1,7 @@
-const scaleData = {
-  step: 25,
-  min: 25,
-  max: 100
+const ScaleData = {
+  STEP: 25,
+  MIN: 25,
+  MAX: 100
 };
 
 const imagePreview = document.querySelector('.img-upload__preview');
@@ -11,8 +11,8 @@ const scaleValue = document.querySelector('.scale__control--value');
 let currentValue = parseFloat(scaleValue.value);
 
 function onButtonMinClick() {
-  if (currentValue > scaleData.min) {
-    currentValue -= scaleData.step;
+  if (currentValue > ScaleData.MIN) {
+    currentValue -= ScaleData.STEP;
     imagePreview.style.transform = `scale(${currentValue / 100})`;
     scaleValue.value = currentValue;
   }
@@ -21,8 +21,8 @@ function onButtonMinClick() {
 buttonMin.addEventListener('click', onButtonMinClick);
 
 function onButtonMaxClick() {
-  if (currentValue < scaleData.max) {
-    currentValue += scaleData.step;
+  if (currentValue < ScaleData.MAX) {
+    currentValue += ScaleData.STEP;
     imagePreview.style.transform = `scale(${currentValue / 100})`;
     scaleValue.value = currentValue;
   }

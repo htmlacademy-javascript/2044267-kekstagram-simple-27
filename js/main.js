@@ -1,5 +1,10 @@
 import {createPicture} from './preview.js';
-import {onUserFormSubmit} from './upload-form.js';
 import {getData} from './api.js';
+import {showGetDataAlert} from './util.js';
+import './upload-form.js';
 
-getData(createPicture, onUserFormSubmit);
+function onFailData() {
+  showGetDataAlert('Ошибка получения данных с сервера');
+}
+
+getData(createPicture, onFailData);

@@ -66,20 +66,19 @@ uploadForm.addEventListener('change', onUploadFormChange);
 
 function renderSuccessMessage() {
   const successElement = successTemplate.cloneNode(true);
-  const inner = document.querySelector('.success__inner');
-  document.body.append(successElement);
+  const closeButton = successElement.querySelector('.success__button');
 
   function closeMessage() {
     successElement.remove();
     document.removeEventListener('keydown', onResetKeydown);
+    closeButton.removeEventListener('click', onCloseButtonClick);
   }
 
-  successElement.addEventListener('click', (evt) => {
-    if (evt.target === inner) {
-      return;
-    }
-    document.addEventListener('click', closeMessage);
-  });
+  function onCloseButtonClick() {
+    closeMessage();
+  }
+
+  closeButton.addEventListener('click', onCloseButtonClick);
 
   function onResetKeydown(evt) {
     if (isEscapeKey (evt)) {
@@ -88,32 +87,33 @@ function renderSuccessMessage() {
   }
 
   document.addEventListener('keydown', onResetKeydown);
+  document.body.append(successElement);
 }
 
 function renderErrorMessage() {
   const failElement = errorTemplate.cloneNode(true);
-  const error = document.querySelector('.error__inner');
-  document.body.append(failElement);
+  const errorButton = failElement.querySelector('.error__button');
 
   function closeErrorMessage() {
     failElement.remove();
-    document.removeEventListener('keydown', onResetError);
+    document.removeEventListener('keydown', onResetErrorKeydown);
+    errorButton.removeEventListener('click', onCloseErrorMessageClick);
   }
 
-  failElement.addEventListener('click', (evt) => {
-    if (evt.target === error){
-      return;
-    }
-    document.addEventListener('click', closeErrorMessage);
-  });
+  function onCloseErrorMessageClick() {
+    closeErrorMessage();
+  }
 
-  function onResetError(evt) {
+  errorButton.addEventListener('click', onCloseErrorMessageClick);
+
+  function onResetErrorKeydown(evt) {
     if (isEscapeKey (evt)) {
       closeErrorMessage();
     }
   }
 
-  document.addEventListener('keydown', onResetError);
+  document.addEventListener('keydown', onResetErrorKeydown);
+  document.body.append(failElement);
 }
 
 function onUserFormSubmit(evt) {
@@ -128,13 +128,10 @@ function onUserFormSubmit(evt) {
         renderSuccessMessage();
       },
       () => {
-        isDisableSubmitButton();
+        isEnableSubmitButton();
         renderErrorMessage();
       },
       new FormData(evt.target),
     );
   }
 }
-
-export {onUserFormSubmit};
-

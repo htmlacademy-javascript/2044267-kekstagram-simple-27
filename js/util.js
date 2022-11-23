@@ -1,4 +1,4 @@
-const alertShowTime = 1000;
+const TIMEOUT = 1000;
 
 function isEscapeKey(evt) {
   return evt.key === 'Escape';
@@ -22,7 +22,7 @@ function showGetDataAlert(message) {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, alertShowTime);
+  }, TIMEOUT);
 }
 
 export {isEscapeKey, showGetDataAlert};

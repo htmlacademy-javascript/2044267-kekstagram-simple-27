@@ -1,19 +1,15 @@
-import {showGetDataAlert} from './util.js';
+const URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
-const sendUrl = 'https://27.javascript.pages.academy/kekstagram-simple';
-
-function getData(onSuccess) {
-  fetch(`${sendUrl}/data`)
+function getData(onSuccess, onFail) {
+  fetch(`${URL}/data`)
     .then((response) => response.json())
     .then(onSuccess)
-    .catch(() => {
-      showGetDataAlert('Ошибка получения данных с сервера');
-    });
+    .catch(onFail);
 }
 
 function sendData(onSuccess, onFail, body) {
   fetch(
-    sendUrl,
+    URL,
     {
       method: 'POST',
       body: body,
@@ -26,7 +22,7 @@ function sendData(onSuccess, onFail, body) {
         onFail();
       }
     })
-    .catch(() => onFail());
+    .catch(onFail);
 }
 
 export {getData, sendData};
