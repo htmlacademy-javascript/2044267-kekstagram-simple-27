@@ -29,4 +29,4 @@ function sendData(onSuccess, onFail, body) {
     .catch(() => onFail());
 }
 
-export {sendData};
+export {getData, sendData};
