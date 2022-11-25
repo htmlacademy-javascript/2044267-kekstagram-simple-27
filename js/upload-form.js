@@ -40,7 +40,7 @@ function onUploadCloseFormClick() {
 
 function openUserForm() {
   uploadOpenForm.classList.remove('hidden');
-  document.querySelector('body').classList.add('modal-open');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.addEventListener('click', onUploadCloseFormClick);
   userForm.addEventListener('submit', onUserFormSubmit);
@@ -52,7 +52,7 @@ function closeUserForm() {
   userForm.reset();
   pristine.reset();
   uploadOpenForm.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFormEscKeydown);
   uploadCloseForm.removeEventListener('click', onUploadCloseFormClick);
   userForm.removeEventListener('submit', onUserFormSubmit);
@@ -96,7 +96,6 @@ function renderErrorMessage() {
 
   function closeErrorMessage() {
     failElement.remove();
-    document.removeEventListener('keydown', onResetErrorKeydown);
     errorButton.removeEventListener('click', onCloseErrorMessageClick);
   }
 
@@ -106,13 +105,6 @@ function renderErrorMessage() {
 
   errorButton.addEventListener('click', onCloseErrorMessageClick);
 
-  function onResetErrorKeydown(evt) {
-    if (isEscapeKey (evt)) {
-      closeErrorMessage();
-    }
-  }
-
-  document.addEventListener('keydown', onResetErrorKeydown);
   document.body.append(failElement);
 }
 
