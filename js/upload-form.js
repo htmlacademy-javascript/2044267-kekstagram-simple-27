@@ -96,6 +96,7 @@ function renderErrorMessage() {
 
   function closeErrorMessage() {
     failElement.remove();
+    document.removeEventListener('keydown', onResetErrorKeydown);
     errorButton.removeEventListener('click', onCloseErrorMessageClick);
   }
 
@@ -105,6 +106,13 @@ function renderErrorMessage() {
 
   errorButton.addEventListener('click', onCloseErrorMessageClick);
 
+  function onResetErrorKeydown(evt) {
+    if (isEscapeKey (evt)) {
+      closeErrorMessage();
+    }
+  }
+
+  document.addEventListener('keydown', onResetErrorKeydown);
   document.body.append(failElement);
 }
 
@@ -121,6 +129,7 @@ function onUserFormSubmit(evt) {
       },
       () => {
         isEnableSubmitButton();
+        document.removeEventListener('keydown', onFormEscKeydown);
         renderErrorMessage();
       },
       new FormData(evt.target),
