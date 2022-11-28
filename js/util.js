@@ -20,10 +20,11 @@ function showGetDataAlert(message) {
 
   document.body.append(alertContainer);
 
-  setTimeout(() => {
+  function removeAlertContainer() {
     alertContainer.remove();
-  }, TIMEOUT);
+  }
+
+  setTimeout(removeAlertContainer, TIMEOUT);
 }
 
 export {isEscapeKey, showGetDataAlert};
-
