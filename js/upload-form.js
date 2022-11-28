@@ -18,7 +18,7 @@ const pristine = new Pristine(userForm, {
 });
 
 function onFormEscKeydown(evt) {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !document.querySelector('.error')) {
     evt.preventDefault();
     closeUserForm();
   }
@@ -116,23 +116,22 @@ function renderErrorMessage() {
   document.body.append(failElement);
 }
 
+function sendForm() {
+  isEnableSubmitButton();
+  closeUserForm();
+  renderSuccessMessage();
+}
+
+function doNotValidAction() {
+  isEnableSubmitButton();
+  renderErrorMessage();
+}
+
 function onUserFormSubmit(evt) {
   evt.preventDefault();
 
   if (pristine.validate()) {
     isDisableSubmitButton();
-    sendData(
-      () => {
-        isEnableSubmitButton();
-        closeUserForm();
-        renderSuccessMessage();
-      },
-      () => {
-        isEnableSubmitButton();
-        document.removeEventListener('keydown', onFormEscKeydown);
-        renderErrorMessage();
-      },
-      new FormData(evt.target),
-    );
+    sendData(sendForm, doNotValidAction, new FormData(evt.target));
   }
 }
